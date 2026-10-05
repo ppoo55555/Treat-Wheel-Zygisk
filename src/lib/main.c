@@ -151,7 +151,8 @@ void preSpecialize(const char *process_name) {
     LOGI("Process is on denylist, cleaning extended traces.");
 
     if (!g_state.disable_gsi_hiding && !do_gsi_hiding(api_table, tw_env)) return;
-    if (!g_state.disable_zygote_mountinfo_leak_fixing && !do_zygote_mountinfo_leak_hiding(api_table, tw_env)) return;
+    // Skipped to prevent SIGSEGV SEGV_ACCERR on modern Android
+    // if (!g_state.disable_zygote_mountinfo_leak_fixing && !do_zygote_mountinfo_leak_hiding(api_table, tw_env)) return;
     if (!g_state.disable_maps_hiding && !do_maps_hiding(api_table, tw_env)) return;
     if (!g_state.disable_custom_font_loading && !do_custom_font_loading(api_table, tw_env)) return;
     if (!g_state.disable_frida_traces_hiding && !do_frida_hiding(api_table, tw_env)) return;

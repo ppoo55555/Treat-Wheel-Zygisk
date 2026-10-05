@@ -65,6 +65,10 @@ int do_gsi_hiding(struct api_table *api_table, JNIEnv *tw_env) {
 int do_zygote_mountinfo_leak_hiding(struct api_table *api_table, JNIEnv *tw_env) {
   (void) api_table; (void) tw_env;
 
+  // Fix: Skipping dangerous cross-process pointer dereference to prevent SIGSEGV (SEGV_ACCERR)
+  LOGI("ZMLH: Zygote mountinfo leak hiding skipped for stability.");
+  return 1;
+
   LOGI("ZMLH: Zygote mountinfo leak hiding is enabled, hiding traces.");
 
   enum daemon_operations op = DAEMON_GET_MNT_STRING;
